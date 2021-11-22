@@ -16,7 +16,7 @@ def main(input_fasta_name,output_csv_name):
     # load model
     root=os.path.dirname(__file__)
     activation=tensorflow.keras.layers.LeakyReLU()
-    model = load_model('model/PC_6_model_best_weights.h5',custom_objects={'LeakyReLU':activation})
+    model = load_model('../model/PC_6_model_best_weights.h5',custom_objects={'LeakyReLU':activation})
     # predict
     score = model.predict(data)
     classifier = score>0.5

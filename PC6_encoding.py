@@ -58,7 +58,7 @@ def PC_encoding(data):
 
 
 # PC6 (input: fasta) 
-def PC_6(fasta_name, length=200):
+def PC_6(fasta_name, length=50):
     r = read_fasta(fasta_name)
     data = padding_seq(r, length)
     dat = PC_encoding(data)
