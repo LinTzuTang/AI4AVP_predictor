@@ -25,16 +25,16 @@ def amino_encode_table_6(path=None):
     return table
 
 # read fasta as dict
-def read_fasta(fasta_fname):
+def read_fasta(fasta_fname,length=None):
     r = dict()
     for record in SeqIO.parse(fasta_fname, 'fasta'):
         idtag = str(record.id)
-        seq = str(record.seq)
+        seq = str(record.seq)[:length]
         r[idtag] = seq
     return r
 
 # sequence padding (token:'X')
-def padding_seq(r,length=200,pad_value='X'):
+def padding_seq(r,length=50,pad_value='X'):
     data={}
     for key, value in r.items():
         if len(r[key]) <= length:
@@ -57,8 +57,8 @@ def PC_encoding(data):
 
 
 # PC6 (input: fasta) 
-def PC_6(fasta_name, length=200):
-    r = read_fasta(fasta_name)
+def PC_6(fasta_name, length=50):
+    r = read_fasta(fasta_name,length)
     data = padding_seq(r, length)
     dat = PC_encoding(data)
     return dat
