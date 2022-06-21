@@ -48,37 +48,3 @@ def metric_array(test_data, test_labels, model):
            'specificity':specificity,
            'f1':f1,
            'mcc':mcc}
-
-def evalution_metrics(test_label, labels_score, save=False, txt_name=None, path = './'):
-    accuracy = accuracy_score(test_label, labels_score.round())
-    confusion = confusion_matrix(test_label, labels_score.round())
-    TP = confusion[1, 1]
-    TN = confusion[0, 0]
-    FP = confusion[0, 1]
-    FN = confusion[1, 0]
-    precision = TP / float(TP + FP)
-    sensitivity = TP / float(FN + TP)
-    specificity = TN / float(TN + FP)
-    f1 = f1_score(test_label, labels_score.round())
-    mcc = matthews_corrcoef(test_label, labels_score.round())
-    # precision TP / (TP + FP)
-    # recall: TP / (TP + FN)
-    # specificity : TN / (TN + FP)
-    # f1: 2 TP / (2 TP + FP + FN)
-    if save:
-        print('  # Accuracy: %f' % accuracy+'\n', file = f)
-        print('  # Precision: %f' % precision+'\n', file = f)  
-        print('  # Sensitivity/Recall: %f' % sensitivity+'\n', file = f)
-        print('  # Specificity: %f' %specificity+'\n', file = f)
-        print('  # F1 score: %f' % f1+'\n', file = f)
-        print('  # Matthews Corrcoef:%f' % mcc+'\n', file = f)
-        with open(path+'%s_metrics.txt'%txt_name, 'w') as f:    
-            for line in f:
-                print(line, end="")
-    else:
-        print('  # Accuracy: %f' % accuracy+'\n')
-        print('  # Precision: %f' % precision+'\n')  
-        print('  # Sensitivity/Recall: %f' % sensitivity+'\n')
-        print('  # Specificity: %f' %specificity+'\n')
-        print('  # F1 score: %f' % f1+'\n')
-        print('  # Matthews Corrcoef:%f' % mcc+'\n')
